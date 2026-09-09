@@ -27,7 +27,7 @@ function mostrarProductos(lista) {
   lista.forEach(prod => {
     contenedor.innerHTML += `
       <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card product-card h-100 shadow-sm">
           <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" style="height: 200px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">${prod.nombre}</h5>

@@ -3,38 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo en Línea</title>
-  <!-- Estilos visuales de Bootstrap -->
+  <title>Amanda Suarez | Catálogo de belleza</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+  <style>
+    :root {
+      --rosa-fondo: #fff5f8;
+      --rosa-claro: #ffe2eb;
+      --rosa: #e85d82;
+      --rosa-oscuro: #a83259;
+      --tinta: #3f2630;
+      --blanco: #ffffff;
+    }
 
-  <div class="container my-5">
-    <h1 class="text-center mb-4">Catálogo de Productos</h1>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--rosa-fondo) 0%, #fffafb 52%, #fce8ef 100%);
+      color: var(--tinta);
+      min-height: 100vh;
+    }
+
+    .catalogo-shell {
+      max-width: 1180px;
+    }
+
+    .brand-mark {
+      align-items: center;
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      background: var(--rosa);
+      content: "";
+      height: 2px;
+      opacity: 0.45;
+      width: 54px;
+    }
+
+    .brand-name {
+      color: var(--rosa-oscuro);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      color: var(--tinta);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: 0;
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-copy {
+      color: #805c68;
+      margin: 0 auto;
+      max-width: 520px;
+    }
+
+    .filter-panel {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(232, 93, 130, 0.2);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(168, 50, 89, 0.1);
+      padding: 1.35rem;
+    }
+
+    .form-label {
+      color: var(--rosa-oscuro);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-select {
+      border-color: #f0bdcc;
+      color: var(--tinta);
+      min-height: 46px;
+    }
+
+    .form-select:focus {
+      border-color: var(--rosa);
+      box-shadow: 0 0 0 0.2rem rgba(232, 93, 130, 0.15);
+    }
+
+    .form-range::-webkit-slider-thumb {
+      background: var(--rosa);
+    }
+
+    .form-range::-moz-range-thumb {
+      background: var(--rosa);
+    }
+
+    .price-value {
+      color: var(--rosa);
+      font-weight: 800;
+    }
+
+    .product-card {
+      border: 1px solid rgba(232, 93, 130, 0.16);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 16px 30px rgba(168, 50, 89, 0.16) !important;
+      transform: translateY(-4px);
+    }
+
+    .product-card .card-img-top {
+      background: var(--rosa-claro);
+    }
+
+    .product-card .card-body {
+      padding: 1.25rem;
+    }
+
+    .product-card .card-title {
+      color: var(--tinta);
+      font-weight: 700;
+    }
+
+    .product-card .card-text {
+      color: #805c68 !important;
+    }
+
+    .product-card .text-primary {
+      color: var(--rosa-oscuro) !important;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 576px) {
+      .brand-mark::before,
+      .brand-mark::after {
+        width: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container catalogo-shell py-5">
+    <header class="text-center mb-5">
+      <div class="brand-mark">
+        <p class="brand-name">Amanda Suarez</p>
+      </div>
+      <h1 class="hero-title">Catálogo de Productos</h1>
+      <p class="hero-copy">Belleza, cuidado y favoritos seleccionados para ti.</p>
+    </header>
 
     <!-- Controles de Filtros -->
-    <div class="row g-3 mb-4 bg-white p-3 rounded shadow-sm">
+    <div class="row g-3 mb-5 filter-panel">
       <div class="col-md-4">
-        <label class="form-label fw-bold">Filtrar por Marca:</label>
+        <label class="form-label fw-bold" for="filtroMarca">Filtrar por Marca</label>
         <select id="filtroMarca" class="form-select">
           <option value="">Todas las marcas</option>
         </select>
       </div>
       <div class="col-md-4">
-        <label class="form-label fw-bold">Filtrar por Categoría:</label>
+        <label class="form-label fw-bold" for="filtroCategoria">Filtrar por Categoría</label>
         <select id="filtroCategoria" class="form-select">
           <option value="">Todas las categorías</option>
         </select>
       </div>
       <div class="col-md-4">
-        <label class="form-label fw-bold">Precio Máximo ($): <span id="precioValor">100</span></label>
+        <label class="form-label fw-bold" for="filtroPrecio">Precio Máximo ($): <span id="precioValor" class="price-value">100</span></label>
         <input type="range" id="filtroPrecio" class="form-range" min="0" max="100" value="100" step="1">
       </div>
     </div>
 
     <!-- Lista de tarjetas de productos -->
     <div class="row" id="contenedorProductos"></div>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
