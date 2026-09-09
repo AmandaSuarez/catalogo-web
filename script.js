@@ -8,7 +8,7 @@ const filtroPrecio = document.getElementById('filtroPrecio');
 const precioValor = document.getElementById('precioValor');
 
 // Cargar el archivo JSON
-fetch('productos.json')
+fetch('productos.json?v=2')
   .then(response => response.json())
   .then(data => {
     productos = data;
